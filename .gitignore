@@ -1,0 +1,5 @@
+.build/
+*.o
+*.d
+ScreenshotApp.app/
+.DS_Store
