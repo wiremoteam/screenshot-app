@@ -1,0 +1,47 @@
+{
+  "": {
+    "swift-dependencies": "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/master.swiftdeps"
+  },
+  "/Users/adriancrismaru/Desktop/programming/screenshot-app/Sources/ScreenshotApp/AppDelegate.swift": {
+    "dependencies": "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/AppDelegate.d",
+    "object": "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/AppDelegate.swift.o",
+    "swiftmodule": "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/AppDelegate~partial.swiftmodule",
+    "swift-dependencies": "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/AppDelegate.swiftdeps"
+  },
+  "/Users/adriancrismaru/Desktop/programming/screenshot-app/Sources/ScreenshotApp/CaptureOverlay.swift": {
+    "dependencies": "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/CaptureOverlay.d",
+    "object": "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/CaptureOverlay.swift.o",
+    "swiftmodule": "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/CaptureOverlay~partial.swiftmodule",
+    "swift-dependencies": "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/CaptureOverlay.swiftdeps"
+  },
+  "/Users/adriancrismaru/Desktop/programming/screenshot-app/Sources/ScreenshotApp/HotkeyManager.swift": {
+    "dependencies": "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/HotkeyManager.d",
+    "object": "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/HotkeyManager.swift.o",
+    "swiftmodule": "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/HotkeyManager~partial.swiftmodule",
+    "swift-dependencies": "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/HotkeyManager.swiftdeps"
+  },
+  "/Users/adriancrismaru/Desktop/programming/screenshot-app/Sources/ScreenshotApp/ImageSaver.swift": {
+    "dependencies": "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/ImageSaver.d",
+    "object": "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/ImageSaver.swift.o",
+    "swiftmodule": "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/ImageSaver~partial.swiftmodule",
+    "swift-dependencies": "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/ImageSaver.swiftdeps"
+  },
+  "/Users/adriancrismaru/Desktop/programming/screenshot-app/Sources/ScreenshotApp/SettingsManager.swift": {
+    "dependencies": "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/SettingsManager.d",
+    "object": "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/SettingsManager.swift.o",
+    "swiftmodule": "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/SettingsManager~partial.swiftmodule",
+    "swift-dependencies": "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/SettingsManager.swiftdeps"
+  },
+  "/Users/adriancrismaru/Desktop/programming/screenshot-app/Sources/ScreenshotApp/SettingsWindow.swift": {
+    "dependencies": "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/SettingsWindow.d",
+    "object": "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/SettingsWindow.swift.o",
+    "swiftmodule": "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/SettingsWindow~partial.swiftmodule",
+    "swift-dependencies": "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/SettingsWindow.swiftdeps"
+  },
+  "/Users/adriancrismaru/Desktop/programming/screenshot-app/Sources/ScreenshotApp/main.swift": {
+    "dependencies": "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/main.d",
+    "object": "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/main.swift.o",
+    "swiftmodule": "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/main~partial.swiftmodule",
+    "swift-dependencies": "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/main.swiftdeps"
+  }
+}

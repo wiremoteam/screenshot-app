@@ -1,0 +1,338 @@
+{
+  "builtTestProducts" : [
+
+  ],
+  "copyCommands" : {
+
+  },
+  "explicitTargetDependencyImportCheckingMode" : {
+    "none" : {
+
+    }
+  },
+  "generatedSourceTargetSet" : [
+
+  ],
+  "pluginDescriptions" : [
+
+  ],
+  "swiftCommands" : {
+    "C.ScreenshotApp-arm64-apple-macosx15.0-debug.module" : {
+      "executable" : "/Library/Developer/CommandLineTools/usr/bin/swiftc",
+      "fileList" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/sources",
+      "importPath" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/Sources/ScreenshotApp/AppDelegate.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/Sources/ScreenshotApp/CaptureOverlay.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/Sources/ScreenshotApp/HotkeyManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/Sources/ScreenshotApp/ImageSaver.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/Sources/ScreenshotApp/SettingsManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/Sources/ScreenshotApp/SettingsWindow.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/Sources/ScreenshotApp/main.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/sources"
+        }
+      ],
+      "isLibrary" : false,
+      "moduleName" : "ScreenshotApp",
+      "moduleOutputPath" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/Modules/ScreenshotApp.swiftmodule",
+      "objects" : [
+        "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/AppDelegate.swift.o",
+        "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/CaptureOverlay.swift.o",
+        "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/HotkeyManager.swift.o",
+        "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/ImageSaver.swift.o",
+        "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/SettingsManager.swift.o",
+        "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/SettingsWindow.swift.o",
+        "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/main.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx13.0",
+        "-enable-batch-mode",
+        "-index-store-path",
+        "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j8",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-module-cache-path",
+        "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-Xfrontend",
+        "-entry-point-function-name",
+        "-Xfrontend",
+        "ScreenshotApp_main",
+        "-swift-version",
+        "5",
+        "-F",
+        "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+        "-sdk",
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "screenshot_app"
+      ],
+      "outputFileMapPath" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/AppDelegate.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/CaptureOverlay.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/HotkeyManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/ImageSaver.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/SettingsManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/SettingsWindow.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/main.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/Modules/ScreenshotApp.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/adriancrismaru/Desktop/programming/screenshot-app/Sources/ScreenshotApp/AppDelegate.swift",
+        "/Users/adriancrismaru/Desktop/programming/screenshot-app/Sources/ScreenshotApp/CaptureOverlay.swift",
+        "/Users/adriancrismaru/Desktop/programming/screenshot-app/Sources/ScreenshotApp/HotkeyManager.swift",
+        "/Users/adriancrismaru/Desktop/programming/screenshot-app/Sources/ScreenshotApp/ImageSaver.swift",
+        "/Users/adriancrismaru/Desktop/programming/screenshot-app/Sources/ScreenshotApp/SettingsManager.swift",
+        "/Users/adriancrismaru/Desktop/programming/screenshot-app/Sources/ScreenshotApp/SettingsWindow.swift",
+        "/Users/adriancrismaru/Desktop/programming/screenshot-app/Sources/ScreenshotApp/main.swift"
+      ],
+      "tempsPath" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build",
+      "wholeModuleOptimization" : false
+    }
+  },
+  "swiftFrontendCommands" : {
+
+  },
+  "swiftTargetScanArgs" : {
+    "ScreenshotApp" : [
+      "/Library/Developer/CommandLineTools/usr/bin/swiftc",
+      "-module-name",
+      "ScreenshotApp",
+      "-package-name",
+      "screenshot_app",
+      "-incremental",
+      "-c",
+      "/Users/adriancrismaru/Desktop/programming/screenshot-app/Sources/ScreenshotApp/AppDelegate.swift",
+      "/Users/adriancrismaru/Desktop/programming/screenshot-app/Sources/ScreenshotApp/CaptureOverlay.swift",
+      "/Users/adriancrismaru/Desktop/programming/screenshot-app/Sources/ScreenshotApp/HotkeyManager.swift",
+      "/Users/adriancrismaru/Desktop/programming/screenshot-app/Sources/ScreenshotApp/ImageSaver.swift",
+      "/Users/adriancrismaru/Desktop/programming/screenshot-app/Sources/ScreenshotApp/SettingsManager.swift",
+      "/Users/adriancrismaru/Desktop/programming/screenshot-app/Sources/ScreenshotApp/SettingsWindow.swift",
+      "/Users/adriancrismaru/Desktop/programming/screenshot-app/Sources/ScreenshotApp/main.swift",
+      "-I",
+      "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx13.0",
+      "-enable-batch-mode",
+      "-index-store-path",
+      "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j8",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-module-cache-path",
+      "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-Xfrontend",
+      "-entry-point-function-name",
+      "-Xfrontend",
+      "ScreenshotApp_main",
+      "-swift-version",
+      "5",
+      "-F",
+      "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+      "-sdk",
+      "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "screenshot_app",
+      "-driver-use-frontend-path",
+      "/Library/Developer/CommandLineTools/usr/bin/swiftc"
+    ]
+  },
+  "targetDependencyMap" : {
+    "ScreenshotApp" : [
+
+    ]
+  },
+  "testDiscoveryCommands" : {
+
+  },
+  "testEntryPointCommands" : {
+
+  },
+  "traitConfiguration" : {
+    "enableAllTraits" : false
+  },
+  "writeCommands" : {
+    "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp-entitlement.plist" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<entitlement-plist>"
+        },
+        {
+          "kind" : "virtual",
+          "name" : "<com.apple.security.get-task-allow>"
+        }
+      ],
+      "outputFilePath" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp-entitlement.plist"
+    },
+    "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/Sources/ScreenshotApp/AppDelegate.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/Sources/ScreenshotApp/CaptureOverlay.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/Sources/ScreenshotApp/HotkeyManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/Sources/ScreenshotApp/ImageSaver.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/Sources/ScreenshotApp/SettingsManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/Sources/ScreenshotApp/SettingsWindow.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/Sources/ScreenshotApp/main.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/sources"
+    },
+    "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.product/Objects.LinkFileList" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<link-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/AppDelegate.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/CaptureOverlay.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/HotkeyManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/ImageSaver.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/SettingsManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/SettingsWindow.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.build/main.swift.o"
+        }
+      ],
+      "outputFilePath" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/ScreenshotApp.product/Objects.LinkFileList"
+    },
+    "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt" : {
+      "alwaysOutOfDate" : true,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<swift-get-version>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Library/Developer/CommandLineTools/usr/bin/swiftc"
+        }
+      ],
+      "outputFilePath" : "/Users/adriancrismaru/Desktop/programming/screenshot-app/.build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt"
+    }
+  }
+}

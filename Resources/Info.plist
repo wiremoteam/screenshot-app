@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleExecutable</key>
+    <string>ScreenshotApp</string>
+    <key>CFBundleIdentifier</key>
+    <string>com.user.ScreenshotApp</string>
+    <key>CFBundleName</key>
+    <string>ScreenshotApp</string>
+    <key>CFBundleDisplayName</key>
+    <string>ScreenshotApp</string>
+    <key>CFBundleVersion</key>
+    <string>1</string>
+    <key>CFBundleShortVersionString</key>
+    <string>1.0.0</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleSignature</key>
+    <string>SCRP</string>
+
+    <!-- Minimum macOS version -->
+    <key>LSMinimumSystemVersion</key>
+    <string>13.0</string>
+
+    <!-- Screen Recording permission description (required for ScreenCaptureKit) -->
+    <key>NSScreenCaptureUsageDescription</key>
+    <string>ScreenshotApp needs screen recording permission to capture the area you select.</string>
+
+    <!-- High-resolution support -->
+    <key>NSHighResolutionCapable</key>
+    <true/>
+
+    <!-- App icon -->
+    <key>CFBundleIconFile</key>
+    <string>AppIcon</string>
+
+    <!-- Main NIB / storyboard — not used, but required key set to empty -->
+    <key>NSPrincipalClass</key>
+    <string>NSApplication</string>
+</dict>
+</plist>
