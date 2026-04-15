@@ -9,7 +9,7 @@ enum CaptureAction { case saveToFolder, copyToClipboard }
 
 // MARK: - Drawing types
 
-enum DrawTool: Int { case move = 0, blur = 1, rectangle = 2, ellipse = 3, line = 4, arrow = 5 }
+enum DrawTool: Int { case move = 0, blur = 1, rectangle = 2, ellipse = 3, line = 4, arrow = 5, text = 6 }
 
 struct DrawAction {
     enum Shape {
@@ -18,10 +18,11 @@ struct DrawAction {
         case ellipse(color: NSColor, lineWidth: CGFloat)
         case line(color: NSColor, lineWidth: CGFloat)
         case arrow(color: NSColor, lineWidth: CGFloat)
+        case text(content: String, color: NSColor, fontSize: CGFloat)
     }
     let shape: Shape
-    let start: CGPoint   // view-space coordinates (full-screen AppKit Y-up)
-    let end:   CGPoint
+    var start: CGPoint   // view-space coordinates (full-screen AppKit Y-up)
+    var end:   CGPoint
 }
 
 // 8 resize handles on the selection rect (AppKit Y-up, so "top" = maxY visually)
@@ -543,6 +544,13 @@ class AnnotationView: NSView {
     var currentColor: NSColor  = NSColor(red: 1, green: 0.22, blue: 0.22, alpha: 1)
     var strokeWidth:  CGFloat  = 3
     var blurRadius:   CGFloat  = 20
+    var fontSize:     CGFloat  = 20
+
+    private weak var activeTextField: TextInputField?
+
+    // Text drag state (move tool)
+    private var draggingTextIndex: Int?
+    private var textDragAnchor:    CGPoint = .zero
 
     private weak var toolPanel: AnnotationToolPanel?
 
@@ -564,10 +572,11 @@ class AnnotationView: NSView {
         // Restore saved tool sizes
         if let r = UserDefaults.standard.object(forKey: "blurRadius")  as? Double { blurRadius  = CGFloat(r) }
         if let w = UserDefaults.standard.object(forKey: "strokeWidth") as? Double { strokeWidth = CGFloat(w) }
+        if let f = UserDefaults.standard.object(forKey: "fontSize")    as? Double { fontSize    = CGFloat(f) }
         super.init(frame: frame)
         wantsLayer = true; layer?.isOpaque = false
         setupToolPanel()
-        toolPanel?.updateSize(blurRadius, isBrightRadius: true)
+        toolPanel?.updateSize(blurRadius, suffix: "r")
     }
     required init?(coder: NSCoder) { fatalError() }
     override var acceptsFirstResponder: Bool { true }
@@ -584,6 +593,8 @@ class AnnotationView: NSView {
             for (rect, handle) in handleRects() {
                 addCursorRect(rect, cursor: cursorFor(handle))
             }
+        } else if currentTool == .text {
+            addCursorRect(selectionRect, cursor: .iBeam)
         } else {
             addCursorRect(selectionRect, cursor: .crosshair)
         }
@@ -592,7 +603,7 @@ class AnnotationView: NSView {
     // MARK: Tool panel
 
     private func setupToolPanel() {
-        let panelW: CGFloat = 622
+        let panelW: CGFloat = 660
         let panelH: CGFloat = 44
         var px = selectionRect.maxX - panelW
         var py = selectionRect.maxY + 8
@@ -602,10 +613,23 @@ class AnnotationView: NSView {
 
         let panel = AnnotationToolPanel(frame: NSRect(x: px, y: py, width: panelW, height: panelH))
         panel.onToolChanged    = { [weak self] t  in
-            self?.currentTool = t; self?.needsDisplay = true
-            self?.window?.invalidateCursorRects(for: self!)
-            (t == .move ? NSCursor.openHand : NSCursor.crosshair).set()
-            self?.window?.makeFirstResponder(self)
+            guard let self else { return }
+            // Commit any active text field when switching tools
+            if let tf = self.activeTextField { self.commitTextField(tf) }
+            self.currentTool = t; self.needsDisplay = true
+            self.window?.invalidateCursorRects(for: self)
+            switch t {
+            case .move: NSCursor.openHand.set()
+            case .text: NSCursor.iBeam.set()
+            default:    NSCursor.crosshair.set()
+            }
+            // Update size label to reflect the newly selected tool
+            switch t {
+            case .blur:  self.toolPanel?.updateSize(self.blurRadius,   suffix: "r")
+            case .text:  self.toolPanel?.updateSize(self.fontSize,     suffix: "px")
+            default:     self.toolPanel?.updateSize(self.strokeWidth,  suffix: "pt")
+            }
+            self.window?.makeFirstResponder(self)
         }
         panel.onColorChanged   = { [weak self] c  in
             self?.currentColor = c
@@ -705,7 +729,16 @@ class AnnotationView: NSView {
     override func mouseDown(with event: NSEvent) {
         let pt = convert(event.locationInWindow, from: nil)
         if currentTool == .move {
-            // Check resize handles first (higher priority than move)
+            // Check text annotations first (topmost = last in array) so they can be dragged
+            for i in stride(from: drawActions.count - 1, through: 0, by: -1) {
+                if let r = textBoundingRect(for: drawActions[i]), r.insetBy(dx: -4, dy: -4).contains(pt) {
+                    draggingTextIndex = i
+                    textDragAnchor    = pt
+                    NSCursor.closedHand.set()
+                    return
+                }
+            }
+            // Check resize handles next
             for (rect, handle) in handleRects() {
                 if rect.insetBy(dx: -3, dy: -3).contains(pt) {
                     resizeHandle    = handle
@@ -716,19 +749,38 @@ class AnnotationView: NSView {
                     return
                 }
             }
-            // Interior → move
+            // Interior → move selection
             guard selectionRect.contains(pt) else { return }
             moveDragAnchor = pt; moveDragOffset = .zero
             NSCursor.closedHand.set()
             needsDisplay = true
             return
         }
+        // Commit any in-progress text field before starting a new action
+        if let tf = activeTextField { commitTextField(tf) }
+
+        if currentTool == .text {
+            guard selectionRect.contains(pt) else { return }
+            showTextField(at: pt)
+            return
+        }
+
         guard selectionRect.contains(pt) else { return }
         dragStart = pt; dragCurrent = pt; needsDisplay = true
     }
 
     override func mouseDragged(with event: NSEvent) {
         let pt = convert(event.locationInWindow, from: nil)
+        if let idx = draggingTextIndex {
+            let dx = pt.x - textDragAnchor.x
+            let dy = pt.y - textDragAnchor.y
+            drawActions[idx].start = CGPoint(x: drawActions[idx].start.x + dx,
+                                             y: drawActions[idx].start.y + dy)
+            drawActions[idx].end   = drawActions[idx].start
+            textDragAnchor = pt
+            needsDisplay = true
+            return
+        }
         if let handle = resizeHandle {
             let delta = CGPoint(x: pt.x - resizeDragStart.x, y: pt.y - resizeDragStart.y)
             resizeLiveRect = applyResize(delta: delta, to: resizeStartRect, handle: handle)
@@ -746,6 +798,12 @@ class AnnotationView: NSView {
     }
 
     override func mouseUp(with event: NSEvent) {
+        if draggingTextIndex != nil {
+            draggingTextIndex = nil
+            NSCursor.openHand.set()
+            needsDisplay = true
+            return
+        }
         if resizeHandle != nil {
             resizeHandle = nil
             let finalRect = resizeLiveRect
@@ -798,14 +856,20 @@ class AnnotationView: NSView {
     override func scrollWheel(with event: NSEvent) {
         guard currentTool != .move else { return }
         let delta = event.deltaY   // positive = scroll up = increase
-        if currentTool == .blur {
+        switch currentTool {
+        case .blur:
             blurRadius = max(5, min(50, blurRadius + delta))
             cachedBlurImg = nil
-            toolPanel?.updateSize(blurRadius, isBrightRadius: true)
+            toolPanel?.updateSize(blurRadius, suffix: "r")
             UserDefaults.standard.set(Double(blurRadius), forKey: "blurRadius")
-        } else {
+        case .text:
+            fontSize = max(10, min(120, fontSize + delta))
+            toolPanel?.updateSize(fontSize, suffix: "px")
+            UserDefaults.standard.set(Double(fontSize), forKey: "fontSize")
+            activeTextField?.font = NSFont.boldSystemFont(ofSize: fontSize)
+        default:
             strokeWidth = max(1, min(30, strokeWidth + delta * 0.5))
-            toolPanel?.updateSize(strokeWidth, isBrightRadius: false)
+            toolPanel?.updateSize(strokeWidth, suffix: "pt")
             UserDefaults.standard.set(Double(strokeWidth), forKey: "strokeWidth")
         }
         needsDisplay = true
@@ -818,6 +882,48 @@ class AnnotationView: NSView {
         let removed = drawActions.removeLast()
         if case .blur = removed.shape { cachedBlurImg = nil }
         needsDisplay = true
+    }
+
+    // MARK: Text tool
+
+    private func showTextField(at point: CGPoint) {
+        let fieldW = max(120, selectionRect.maxX - point.x - 4)
+        let fieldH = fontSize + 16
+        let tf = TextInputField(frame: NSRect(x: point.x, y: point.y - fieldH + fontSize,
+                                              width: fieldW, height: fieldH))
+        tf.font = NSFont.boldSystemFont(ofSize: fontSize)
+        tf.textColor = currentColor
+        tf.backgroundColor = .clear
+        tf.drawsBackground = false
+        tf.isBezeled = false
+        tf.isBordered = false
+        tf.focusRingType = .none
+        tf.placeholderString = "Type text…"
+        tf.onCommit = { [weak self, weak tf] text in
+            guard let self, let tf else { return }
+            self.commitTextField(tf, text: text)
+        }
+        tf.onCancel = { [weak self, weak tf] in
+            guard let self, let tf else { return }
+            tf.removeFromSuperview()
+            if self.activeTextField === tf { self.activeTextField = nil }
+            self.window?.makeFirstResponder(self)
+        }
+        addSubview(tf)
+        activeTextField = tf
+        window?.makeFirstResponder(tf)
+    }
+
+    private func commitTextField(_ tf: TextInputField, text: String? = nil) {
+        let content = (text ?? tf.stringValue).trimmingCharacters(in: .whitespaces)
+        tf.removeFromSuperview()
+        if activeTextField === tf { activeTextField = nil }
+        if !content.isEmpty {
+            let shape = DrawAction.Shape.text(content: content, color: currentColor, fontSize: fontSize)
+            drawActions.append(DrawAction(shape: shape, start: tf.frame.origin, end: tf.frame.origin))
+            needsDisplay = true
+        }
+        window?.makeFirstResponder(self)
     }
 
     private func doSaveToFolder() {
@@ -931,6 +1037,7 @@ class AnnotationView: NSView {
         case .ellipse:   return .ellipse(color: currentColor, lineWidth: strokeWidth)
         case .line:      return .line(color: currentColor, lineWidth: strokeWidth)
         case .arrow:     return .arrow(color: currentColor, lineWidth: strokeWidth)
+        case .text:      return nil  // text is committed via inline NSTextField, not drag
         }
     }
 
@@ -971,6 +1078,18 @@ class AnnotationView: NSView {
 
         case .arrow(let color, let width):
             renderArrow(from: s, to: e, color: color, width: width)
+
+        case .text(let content, let color, let fontSize):
+            let shadow = NSShadow()
+            shadow.shadowColor = NSColor.black.withAlphaComponent(0.75)
+            shadow.shadowBlurRadius = 2
+            shadow.shadowOffset = CGSize(width: 1, height: -1)
+            let attrs: [NSAttributedString.Key: Any] = [
+                .font:            NSFont.boldSystemFont(ofSize: fontSize),
+                .foregroundColor: color,
+                .shadow:          shadow,
+            ]
+            NSAttributedString(string: content, attributes: attrs).draw(at: s)
         }
     }
 
@@ -1094,8 +1213,33 @@ class AnnotationView: NSView {
                       height: min(r.height, sz.height - y))
     }
 
+    /// Bounding rect of a text DrawAction in view coordinates, or nil if not a text action.
+    private func textBoundingRect(for action: DrawAction) -> CGRect? {
+        guard case .text(let content, _, let fontSize) = action.shape else { return nil }
+        let attrs: [NSAttributedString.Key: Any] = [.font: NSFont.boldSystemFont(ofSize: fontSize)]
+        let size = NSAttributedString(string: content, attributes: attrs).size()
+        return CGRect(origin: action.start, size: CGSize(width: size.width + 4, height: size.height + 4))
+    }
+
     private func makeRectFromPoints(_ a: CGPoint, _ b: CGPoint) -> CGRect {
         CGRect(x: min(a.x,b.x), y: min(a.y,b.y), width: abs(b.x-a.x), height: abs(b.y-a.y))
+    }
+}
+
+// MARK: - Text Input Field
+
+/// Transparent inline NSTextField used by the text annotation tool.
+/// Enter/Return commits; ESC cancels.
+class TextInputField: NSTextField {
+    var onCommit: ((String) -> Void)?
+    var onCancel: (() -> Void)?
+
+    override func keyDown(with event: NSEvent) {
+        switch event.keyCode {
+        case 36, 76: onCommit?(stringValue)   // Return / Enter
+        case 53:     onCancel?()              // ESC
+        default:     super.keyDown(with: event)
+        }
     }
 }
 
@@ -1147,6 +1291,7 @@ class AnnotationToolPanel: NSView {
             (.ellipse,   "⬭",   "Ellipse (E)"),
             (.line,      "╱",   "Line (L)"),
             (.arrow,     "→",   "Arrow (A)"),
+            (.text,      "T",   "Text (T)"),
         ]
         for (tool, icon, tip) in tools {
             let btn = makeToolButton(icon, tip: tip, x: x)
@@ -1203,8 +1348,7 @@ class AnnotationToolPanel: NSView {
         highlightTool(.move)
     }
 
-    func updateSize(_ value: CGFloat, isBrightRadius: Bool) {
-        let suffix = isBrightRadius ? "r" : "pt"
+    func updateSize(_ value: CGFloat, suffix: String) {
         sizeLabel.stringValue = "\(Int(value.rounded()))\(suffix)"
     }
 
